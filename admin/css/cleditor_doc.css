@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+    font-family: 'BPGIngiriArialRegular';
+    src: url('/src/css/fonts/bpg_ing_arial.eot');
+    src: url('/src/css/fonts/bpg_ing_arial.eot') format('embedded-opentype'),
+         url('/src/css/fonts/bpg_ing_arial.woff') format('woff'),
+         url('/src/css/fonts/bpg_ing_arial.ttf') format('truetype'),
+         url('/src/css/fonts/bpg_ing_arial.svg#BPGIngiriArial') format('svg');
+} 
+img{width:100%; margin:0 0 5px 0}
+img.float{width:50%; float:left; margin:0 10px 10px 0}
+
+p{margin: 0 0 15px 0; }
+body {
+    font-family: BPGIngiriArialRegular;
+    background: #f8f8f8;
+    font-size: 15px;
+	line-height: 20px;
+    color: #555;
+    -webkit-font-smoothing: antialiased !important;
+}
+h5{
+	margin:0;
+	font-size:inherit;
+	font-weight: normal;
+	}
+h5 a {
+	display: block;
+    background-color: #058;
+    color: #fff;
+    padding: 4px 10px;
+    margin-bottom: 1px;
+    border-radius: 5px;
+    text-align: left;
+	}
+.inline{
+	display: inline-block;
+	margin: 10px;
+}
+ 
+blockquote:has(h5 a){
+    margin: 0 0 20px 0 !important;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+blockquote:has(h5 a) > *{
+    display: block;
+    height: 100%;
+    width: 100%;
+    min-width: 150px;
+    max-width: 200px; 
+}

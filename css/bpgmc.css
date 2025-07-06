@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'BPGCaps';
+    src: url('/css/fonts/bpgmc.eot');
+    src: url('/css/fonts/bpgmc.eot') format('embedded-opentype'),
+         url('/css/fonts/bpgmc.woff') format('woff'),
+         url('/css/fonts/bpgmc.ttf') format('truetype'),
+         url('/css/fonts/bpgmc.svg#BPGMrgvlovaniCaps') format('svg'); 
+}

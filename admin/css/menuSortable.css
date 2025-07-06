@@ -1,0 +1,159 @@
+@charset "utf-8";
+
+/*******MENU SORTABLE DESIGN ********/
+
+/*Menu Labels*/
+.cat_titles {
+    padding-left:10px;
+    height:27px;
+    padding-top:0px;
+    line-height:120% !important;
+    border-bottom:0px;
+    border-left: 1px solid #f4f4f4;
+    border-bottom: 1px solid   #A0292D;
+    background: #f4f4f4;
+}
+
+.cat_titles div {
+    float:left;
+    font-size:12px;
+    width:117px;
+    padding:4px 5px 5px 0px;
+    font-weight:bold;
+    
+    
+}
+
+
+
+/*Menu Grid design */
+ol {
+    margin:0;
+    padding:0;
+}
+
+ol.sortable,ol.sortable ol {
+    margin:0 0 0 15px;
+    padding:0;
+    list-style-type:none;
+}
+
+ol.sortable {
+    margin:0;
+	}
+.sortable li {
+    margin:10px 0 0 0;
+    padding:0;
+    clear:both;
+    font-size:12px;
+    list-style:none outside;
+    background:#fff;
+    border:0px !important
+}
+
+.sortable li div {
+    border:1px solid #eaeaea;
+    padding: 0px 10px;
+    position:relative;
+    padding-left:25px;
+    background: url(/img/v-gradient.gif) repeat-x;
+    border-radius:  3px;
+    overflow: hidden;
+}
+.sortable li div:hover {
+    background: #fefefe;
+}
+
+.sortable li div .hendle {
+    cursor:move;
+    position:absolute;
+    left:3px;
+    display:block;
+    width:16px;
+    margin-top: 1px;
+    height:20px;
+    font-size:1px;
+    background:url( '/img/ui-icons_222222_256x240.png ') -1px -220px;
+    cursor:move;
+}
+
+.sortable li div .mtitle {
+	width: 355px;
+    display:inline-block;
+    word-wrap:break-word;
+    float:left;
+    padding:6px 0px;
+}
+
+.sortable li div .mtitle:hover {
+    text-decoration:underline;
+}
+
+.sortable li div img {
+    float:right;
+    margin-left:5px;
+}
+
+.sortable li div .delete_icon {
+    cursor:pointer
+}
+
+.sortable dl.label {
+    display:inline-block;
+    float:left;
+    padding:6px 0px;
+	margin:0;	
+}
+
+.sortable dl.label dt {
+    float:left;
+    width:70px;
+    word-wrap:break-word;
+}
+
+.sortable dl.label dt.short_url{
+    width: 130px;
+}
+
+.sortable span.action {
+    padding:6px 0px;
+    display: inline-block;
+    float:right;
+}
+.placeholder {
+    background-color:#cfcfcf !important;
+    height:30px
+}
+
+.ui-nestedSortable-error {
+    background:#fbe3e4;
+    color:#8a1f11;
+}
+
+#loader {
+    padding:0px;
+    background:#fff;
+    position:relative;
+}
+
+#loader .sort_loader {
+    position:absolute;
+    z-index:10;
+    top:0px;
+    width:100%;
+    height:200px;
+    background:#aaa;
+    opacity:0.7;
+    padding-top:7%;
+    height:70%;
+    text-align:center;
+    font-size:26px;
+    color:#fff;
+    font-family:arial;
+    font-weight:bold;
+}
+
+#loader .sort_loader img {
+    border:1px solid #000
+}
+

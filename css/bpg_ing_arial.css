@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'BPGIngiriArial';
+    src: url('/css/fonts/bpg_ing_arial.eot');
+    src: url('/css/fonts/bpg_ing_arial.eot') format('embedded-opentype'),
+         url('/css/fonts/bpg_ing_arial.woff') format('woff'),
+         url('/css/fonts/bpg_ing_arial.ttf') format('truetype'),
+         url('/css/fonts/bpg_ing_arial.svg#BPGIngiriArial') format('svg');
+} 

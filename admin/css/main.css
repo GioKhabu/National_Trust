@@ -1,0 +1,92 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+body{margin:0; padding:0; }
+div.ui-datepicker{ font-size:10px;}
+.HeaderTR{background-color:#CCC; text-align:center; font-weight:bold}
+.hand{cursor:pointer}
+.normal {	font-family: Arial, Helvetica, sans-serif, Sylfaen;	font-size: 14px;}
+.SelectedTD2{cursor:pointer; text-align:left}
+.SelectedTD2:hover{background-color:#E3CDB5; COLOR:#662200; cursor:pointer}
+.SelectedTR{background-color:#FCC}
+
+
+.pager  {    text-align: center;}
+.pager li{display:inline-block; text-align: center; } 
+.pager li.active a{ color:red; }
+.pager li a{ display:inline-block; width: 16px; height: 16px; background-color: #ddd; margin: 2px; padding: 2px 4px;}
+.pager li a:hover{background-color:#aaa;}
+
+
+.pagination  {    text-align: center;}
+.pagination li{display:inline-block; text-align: center; } 
+.pagination li a.active { color:red; }
+.pagination li a{ display:inline-block; width: 16px; height: 16px; background-color: #ddd; margin: 2px; padding: 2px 4px;}
+.pagination li a:hover{background-color:#aaa;}
+.pagination li a.prev-next {    width: auto;}
+
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+}
+.fa-angle-right:before {
+    content: "\f105";
+}
+.fa-angle-left:before {
+    content: "\f104";
+}
+
+
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+
+
+
+
+.login_bg{  height: 120px;  width: 100%; background: #055 ;  position: absolute;  top: 50%;  margin-top: -230px;}
+.login_form{width:300px; height:370px; border:1px solid rgba(0,0,0,0.25); background-color:rgba(245,245,245,0.8); padding:56px 34px; 
+		position:absolute; left:50%; top:50%; margin-left:-184px; margin-top:-250px}
+.login_form form{ font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#525252 }
+.login_form form input:not([type='submit']) { width:93%; padding: 0 10px;}
+.login_form form input{height:38px; background:#FFF; font-size:13px; line-height:36px; border-collapse:collapse; border:1px solid #CCC}
+.login_form form div{padding:10px 0; line-height:23px}
+.login_form form input[type='submit'] { border-color:#000; cursor:pointer; padding:0 25px; letter-spacing: 1px;  }
+
+
+
+
+
+.borderDiv{ border:1px solid #eeeeee; border-radius:5px}
+body, table{font-family:Arial, Helvetica, sans-serif; font-size:14px}
+.menu  a{text-decoration:none; color:#555}
+.menu li{margin-bottom:15px}
+.menu li.active{ list-style-image:url(/admin/img/active_bulet.png); color:#000;   font-weight: bold;}
+table{border-collapse:collapse}
+
+
+
+
+.rotate {   /* Something you can count on */   height: 160px;   white-space: nowrap; }
+.rotate > div {
+  transform:      /* Magic Numbers */     translate(8px, 71px)     /* 45 is really 360 - 45 */     rotate(-90deg);
+  width: 30px;
+}
+.rotate > div > span {   border-bottom: 1px solid #ccc;   padding: 5px ; }
+
+
+
+
+
