@@ -1,29 +1,52 @@
-<? session_start(); $v='1.04_'.time();
+<?php
+session_start();
+$v = '1.04_'.time();
 
-error_reporting(E_ALL ); ini_set('display_errors', '1');
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 include_once('conf.php');
 include_once('functions.php');
 
-$url=parse_url($_SERVER['REQUEST_URI']);
-if(!$url || !isset($url['path'])) 	$url=array('path'=>'');
-$url=$url['path'];
-list($nul, $Lang, $menu, $page, $param1, $param2, $param3)=explode('/',$url.'///////');
+$localPrefix = '';
 
-if($menu=='') $menu='home';
+$url = parse_url($_SERVER['REQUEST_URI']);
+if (!$url || !isset($url['path'])) $url = ['path' => ''];
+$url = $url['path'];
 
-$LangID=in_multi_array($Lang, $Langs, 'Name2');
-if($LangID === false) {
-//if(!in_array($lang,$Langs)) {
-	header ('Location: /'.$Langs[1]['Name2']);
-	die(); 
-	}else{
-	$LangChar=$Langs[$LangID]['Char'];
-	$Lid=$LangID+1;
-	if(!isset($Langs[$Lid])) $Lid=1;
-	$Lang2=$Langs[$Lid]['Name2'];
-	}
+// Remove local prefix if present
+if (strpos($url, $localPrefix) === 0) {
+    $url = substr($url, strlen($localPrefix));
+}
+$url = trim($url, '/');
+
+// Explode into parts: now $Lang is first part, no unused $nul
+list($Lang, $menu, $page, $param1, $param2, $param3) = explode('/', $url . '//////');
+
+// Set defaults if missing
+if ($Lang == '') {
+    $Lang = $Langs[1]['Name2'];  // default language, e.g. "ge"
+}
+if ($menu == '') {
+    $menu = 'home';
+}
+
+$LangID = in_multi_array($Lang, $Langs, 'Name2');
+if ($LangID === false) {
+    if ($_SERVER['HTTP_HOST'] == 'localhost') {
+        header('Location: ' . $localPrefix . '/' . $Langs[1]['Name2']);
+    } else {
+        header('Location: /' . $Langs[1]['Name2']);
+    }
+    die();
+} else {
+    $LangChar = $Langs[$LangID]['Char'];
+    $Lid = $LangID + 1;
+    if (!isset($Langs[$Lid])) $Lid = 1;
+    $Lang2 = $Langs[$Lid]['Name2'];
+}
 ?>
+
 <!doctype html> 
 <html lang="en" class="no-js">
 <head>
