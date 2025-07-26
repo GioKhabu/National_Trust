@@ -52,7 +52,7 @@ $('.translate').click(function(e) {
 		dataType:"json",
 		data:{f:'translate',ls:'ka',ld:ld,t:t,id:id}
 	}).done(function(data){
-		console.log('done=',data);
+		// console.log('done=',data);
 		id=data['id'];
 		txt=data['txt'];
 		$('input[id='+id+']').val(txt.capitalize()).change();
@@ -82,7 +82,7 @@ $(document).ready(function(e) {
 			type:'POST',
 			data:{f:'setIntValue',id:id[1],li:id[2],n:name, v:v},
 			success: function(data){
-				console.log(data);
+				// console.log(data);
 				$(src).css('background-color','#FFF');
 				},
 			error: function(data){

@@ -145,7 +145,7 @@ $('.DeletePhoto').click(function(e) {
 		type:'POST',
 		data:'f=deleteTableImage&Table=<?=$Table?>&nid='+nid+'&pid='+pid,
 		success: function(data){
-			console.log(data);
+			// console.log(data);
 			if(data==2){
 				$(delPhoto).parent().remove();
 				enumPhotos();
@@ -168,7 +168,7 @@ function updatePhotosPos(){
 		type:'POST',
 		data:'f=sortTableMedia&Table=<?=$Table?>&nid='+nid+'&list='+list.substr(1),
 		success: function(data){
-			console.log(data);
+			// console.log(data);
 			enumPhotos();
 			},
 		error: function(data){

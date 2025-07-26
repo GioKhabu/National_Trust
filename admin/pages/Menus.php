@@ -213,14 +213,14 @@ $('#TitleE').on('click',function(e){
 		var id='TitleE';
 		var t=$('#TitleG').val();
 		var ld='en';
-		console.log(id,ld,t);
+		// console.log(id,ld,t);
 		$.ajax({
 			url:"/admin/interactive.php",
 			type:'POST',
 			dataType:"json",
 			data:{f:'translate',ls:'ka',ld:ld,t:t,id:id}
 		}).done(function(data){
-			console.log('done=',data);
+			// console.log('done=',data);
 			id=data['id'];
 			txt=data['txt'];
 			$('input[id='+id+']').val(txt.capitalize()).change();

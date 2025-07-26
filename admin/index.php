@@ -286,8 +286,6 @@ if(($_SESSION['admin']=='admin')&&($_SESSION['Name']=='')){
 		}
 	$Menu.='><a href="?Action='.$ff.'" >'.$ff.'</a></li> ';
 	}
-
-// for($i=0; $i<count($fields); $i++)
 foreach($fields as $field)
 	{
 	$ff=substr($field[0],2);
@@ -351,6 +349,7 @@ switch($Action){
 	case "Partners": include_once("pages/Partners.php"); break;
 	case "Events": include_once("pages/Events.php"); break;
 	case "Residents": include_once("pages/Residents.php"); break;
+	case "MapProjects": include_once("pages/MapProjects.php"); break;
 	// default: include_once("pages/$Action.php"); break;
 }
 
@@ -560,37 +559,43 @@ if($Action=='ChngPass'){ // ================= CHANGE PASSWORD
 
 <script>
 $(document).ready(function(e) {
-    $('.Date').datepicker({
-		changeMonth: true,
-		changeYear: true,
-		dateFormat: 'yy-mm-dd',
-		});
-	$('.DTime').datetimepicker({
-		changeMonth: true,
-		changeYear: true,
-		dateFormat: 'yy-mm-dd',
-		});
-    
-	$('.Confirm').click(function(e) {
-		title=$(this).attr('title');
-		method=$(this).attr('method');
-		id=$(this).closest('tr').attr('num');
-		if(method){
-			if(confirmMessage(title,''))
-				location='?Action=<?=$Action?>&'+method+'='+id;
-			} else return confirmMessage(title,'');
-		});
-	$('.SelectedTD2').click(function(e) {
-		num=parseInt($(this).attr('num'));
-		href=$(this).attr('href');
-		if(typeof(href)!='undefined')
-			location=href;
-			else
-		if(num>0)
-			location='?Action=<?=$Action?>&ID='+num;
-		});
-	});
+    if ($.fn.datepicker) {
+        $('.Date').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'yy-mm-dd',
+        });
+    }
+
+    if ($.fn.datetimepicker) {
+        $('.DTime').datetimepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'yy-mm-dd',
+        });
+    }
+
+    $('.Confirm').click(function(e) {
+        title = $(this).attr('title');
+        method = $(this).attr('method');
+        id = $(this).closest('tr').attr('num');
+        if (method) {
+            if (confirmMessage(title, ''))
+                location = '?Action=MapProjects&' + method + '=' + id;
+        } else return confirmMessage(title, '');
+    });
+
+    $('.SelectedTD2').click(function(e) {
+        num = parseInt($(this).attr('num'));
+        href = $(this).attr('href');
+        if (typeof(href) != 'undefined')
+            location = href;
+        else if (num > 0)
+            location = '?Action=MapProjects&ID=' + num;
+    });
+});
 </script>
+
 
 <?
 }

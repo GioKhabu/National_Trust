@@ -15,6 +15,7 @@
   KEY `ThemeID` (`ThemeID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
 	*/
+	
 if(!isset($Img_width)) die('Error');
 if(!isset($showEndDate)) $showEndDate=false;
 
@@ -255,7 +256,7 @@ function popSimilarTags(){
 		data:'f=getSimilarTags&w='+GSKv,
 		success: function(data){
 			if(data!=''){
-				console.log(data);
+				// console.log(data);
 				$('<div class="SimilarTags"><table>'+data+'</table></div>').insertAfter('#Tags');
 				removeOnOutsideClick('.SimilarTags');
 				GSKi=0;
@@ -340,7 +341,7 @@ $('.DeletePhoto').click(function(e) {
 		type:'POST',
 		data:'f=deleteTableImage&Table=<?=$Table?>&nid='+nid+'&pid='+pid,
 		success: function(data){
-			console.log(data);
+			// console.log(data);
 			if(data==2){
 				$(delPhoto).parent().remove();
 				enumPhotos();

@@ -482,11 +482,20 @@ function mctime(){
 	$t0=explode('.',$t[0]);
 	return $t[1].substr($t0[1],0,6);
 	}
-function getIPVal($IP){
-	$IPVal=explode('.',$IP);
-	$IPVal=(($IPVal[0]*256+$IPVal[1])*256+$IPVal[2])*256+$IPVal[3];
-	return($IPVal);
+function getIPVal($IP) {
+	// IPv4
+	if (filter_var($IP, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+		$parts = explode('.', $IP);
+		return (($parts[0] * 256 + $parts[1]) * 256 + $parts[2]) * 256 + $parts[3];
 	}
+
+	// IPv6 — fallback to hash-based approach
+	if (filter_var($IP, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+		return hexdec(substr(md5($IP), 0, 8)); // Turn IPv6 into a stable 32-bit integer
+	}
+
+	return 0; // Unknown/invalid IP
+}
 function reArray2(&$arrs) {
 	$file_ary = array();
 	if($arrs)

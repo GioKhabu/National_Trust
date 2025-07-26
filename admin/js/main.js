@@ -3,8 +3,8 @@
 $('.autoClose').click(function(){
 	cl=$(this).hasClass('closed');
 	table=$(this).closest('table');
-	console.log(cl);
-	console.log(this);
+	// console.log(cl);
+	// console.log(this);
 	if(cl){
 		$(table).find('tr').show();
 		$(this).removeClass('closed');	

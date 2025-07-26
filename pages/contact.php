@@ -76,8 +76,9 @@ if($Lang=='ge')		{?> გთხოვთ შეგვატყობინოთ 
 
 			<h3><?=_Interface('ჩვენი მისამართი')?></h3>
 			<?=_Interface('საქართველოს ეროვნული ფონდი')?><br> 
+      <?=_Interface('ს.კ.:404522389')?><br>
           <?=_Interface('მეფე სოლომონ ბრძენის ქ.33, 0103 თბილისი, საქართველო')?><br>
-        	<?=_Interface('ტელ')?>: (+995) 599 567 789 <br>
+        	<?=_Interface('ტელ')?>: (+995) 555 490 917 <br>
           <?=_Interface('ელ-ფოსტა')?>: <a href="mailto:office@nationaltrustgeo.org">office@nationaltrustgeo.org</a></div>
       </div>
       

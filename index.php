@@ -305,16 +305,16 @@ if($MT=='Dynamic'){
     $('.fixText img').each(function(i,e){
         var photo=$(e).attr('src');
         var a='<div class="f-carousel__slide" data-thumb-src="'+photo+'" data-thumb-width="108" data-thumb-height="72" data-fancybox="gallery" data-src="'+photo+'"><img src="'+photo+'"></div>';
-        console.log(a);
+        // console.log(a);
         $(a).insertAfter(e);
         $(e).remove();
     })
     
     $('.fixewdPage .well a').each(function(i,e){
-        console.log(i,e);
+        // console.log(i,e);
         var url=$(e).attr('href').split('/').pop();
         url=url.split('#')[0];
-        console.log(url,'<?=urldecode($menu)?>');
+        // console.log(url,'<?=urldecode($menu)?>');
         if(url=='<?=urldecode($menu)?>')
            $(e).parent().addClass('selected');
         })
@@ -355,8 +355,8 @@ if($MT=='Dynamic'){
 			<div class="foot-inner-b">
 				© 2024 <?=_Interface('საქართველოს ეროვნული ფონდი')?><br />
 				<?=_Interface('მეფე სოლომონ ბრძენის ქ.33, 0103 თბილისი, საქართველო')?><br />
-				<br />
-				<?=_Interface('ტელ')?>: (+995) 599 567 789 <br />
+				<?=_Interface('ს.კ.:404522389')?><br />
+				<?=_Interface('ტელ')?>: (+995) 555 490 917 <br />
 				<a href="mailto:office@nationaltrustgeo.org">office@nationaltrustgeo.org</a>
 				<br /><br />	
 
@@ -439,21 +439,29 @@ var timerHandle = setInterval(function() {
 
 
 <script>
-	$(window).scroll( function() {
-		if($(window).width()>=992){
-			var h0=$('.pageContainer > .row > .col-md-3').height();
-			var s=$(window).scrollTop();
-			var h=$('.pageContainer > .row').height();
-            var t=$('.pageContainer > .row').offset().top;
-            s=s-t;
-            if(s<0) s=0; 
-			var ss;
-			if(h0+s<h) ss=s; else ss=h-h0;
-			$('.pageContainer > .row > .col-md-3').css({top:ss});
-			}else{
-			$('.pageContainer > .row > .col-md-3').css({top:0});
-			}
-	})
+  $(window).scroll(function () {
+    if ($(window).width() >= 992) {
+      var $row = $('.pageContainer > .row');
+      var $col = $('.pageContainer > .row > .col-md-3');
+
+      // Make sure both elements exist before continuing
+      if ($row.length && $col.length && $row.offset()) {
+        var h0 = $col.height();
+        var s = $(window).scrollTop();
+        var h = $row.height();
+        var t = $row.offset().top;
+
+        s = s - t;
+        if (s < 0) s = 0;
+        var ss = (h0 + s < h) ? s : (h - h0);
+        $col.css({ top: ss });
+      } else {
+        $col.css({ top: 0 });
+      }
+    } else {
+      $('.pageContainer > .row > .col-md-3').css({ top: 0 });
+    }
+  });
 </script>
     
 </body>

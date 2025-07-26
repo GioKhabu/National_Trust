@@ -129,14 +129,14 @@ if($Action=='HomeSlider'){ // ==================== HomeSlider
 	String.prototype.capitalize = function(ARGUMENT){ return this.substring(0, 1).toUpperCase() + this.substring(1); };
 
 	function translate(id,ld,t){
-		console.log(id,ld,t);
+		// console.log(id,ld,t);
 		$.ajax({
 			url:"/admin/interactive.php",
 			type:'POST',
 			dataType:"json",
 			data:{f:'translate',ls:'ka',ld:ld,t:t,id:id}
 		}).done(function(data){
-			console.log('done=',data);
+			// console.log('done=',data);
 			id=data['id'];
 			txt=data['txt'];
 			$('input[id='+id+']').val(txt.capitalize()).change();

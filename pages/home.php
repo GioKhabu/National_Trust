@@ -3,41 +3,58 @@
 <!-- Large screen slider -->
 <div class="hero-content">
   <ul class="bxslider">
-	  <?
-	  $ptk=mysqli_query($baza,'select * from Slider order by Pos');
-		while($row=mysqli_fetch_array($ptk,1)){
-			$data=json_decode($row['Data'],true);
-	  ?>
-    <li style="background:url(/<?=$data['Photo']?>) center; background-size: cover; "><img src="/img/Poster_transparent.png" />
-		<?=$data['Url'.$LangChar]!=''?'<a href="'.$data['Url'.$LangChar].'" '.(substr($data['Url'.$LangChar],0,4)=='http'?'target="_blank"':'').'>':''?>
-      <div class="hero-caption"><?=$data['Header'.$LangChar]?>
-		  <div class="hc2"><?=$data['SubHeader'.$LangChar]?></div>
-		</div>
-      <?=$data['Url'.$LangChar]!=''?'</a>':''?>
-	</li>
-	  <? } ?>
+<?php
+$ptk = mysqli_query($baza, 'select * from Slider order by Pos');
+while ($row = mysqli_fetch_array($ptk, 1)) {
+    $data = json_decode($row['Data'], true);
+    if (!is_array($data)) {
+    error_log("Invalid JSON for slider: " . $row['Data']);
+    continue;
+}
+
+    $photo = !empty($data['Photo']) ? $data['Photo'] : 'img/default.jpg'; // change to real fallback path
+    $urlKey = 'Url' . $LangChar;
+    $headerKey = 'Header' . $LangChar;
+    $subHeaderKey = 'SubHeader' . $LangChar;
+
+    $url = isset($data[$urlKey]) ? $data[$urlKey] : '';
+    $header = isset($data[$headerKey]) ? $data[$headerKey] : '';
+    $subHeader = isset($data[$subHeaderKey]) ? $data[$subHeaderKey] : '';
+    ?>
+    <li style="background:url(/<?= htmlspecialchars($photo) ?>) center; background-size: cover;">
+        <img src="/img/Poster_transparent.png" />
+        <?php if ($url != ''): ?>
+            <a href="<?= htmlspecialchars($url) ?>" <?= (substr($url, 0, 4) == 'http' ? 'target="_blank"' : '') ?>>
+        <?php endif; ?>
+            <div class="hero-caption">
+                <?= htmlspecialchars($header) ?>
+                <div class="hc2"><?= htmlspecialchars($subHeader) ?></div>
+            </div>
+        <?php if ($url != ''): ?>
+            </a>
+        <?php endif; ?>
+    </li>
+    <?php
+}
+?>
+
+
   </ul>
 </div>
 <link rel="stylesheet" type="text/css" href="/bxslider4/dist/jquery.bxslider.min.css?v<?=$v?>" />
-<script src="/bxslider4/dist/jquery.bxslider.min.js?v<?=$v?>"></script>
-<script type="text/javascript">
-		$(document).ready(function(){
-			$('.bxslider').bxSlider({
-				auto: true,
-				pager: false,
-				autoHover: true,
-				mode:'fade',
-				// captions: true,
-				// hyperlinks: true,
-				// autoControls: true,
-				// buildPager: function(slideIndex){
-				// 	switch(slideIndex){
-				// 	}
-				// }
-			});
-		});
-	</script>
-
+<script src="/bxslider4/dist/jquery.bxslider.min.js?v=<?=$v?>"></script>
+  <script>
+    $(document).ready(function() {
+      if ($('.bxslider').length && typeof $.fn.bxSlider === 'function') {
+        $('.bxslider').bxSlider({
+          auto: true,
+          mode: 'fade',
+          pager: false,
+          autoHover: true
+        });
+      }
+    });
+  </script>
 
 
 <div class="home-heading-container reconstruction">
@@ -147,34 +164,6 @@
 
 
 
-<div class="home-heading-container">
-	<div>
-		<h2 class="home-heading">
-			<?=_Interface('ნამუშევრების გალერეა')?>
-		</h2>
-		<div class="row news"><?
-		if(isset($_GET['st'])) $st=(int)$_GET['st']; else $st=0;
-		$ptk=mysqli_query($baza,'select * from CraftGallery  order by Pos desc limit 4');
-		while($row=mysqli_fetch_array($ptk,1)){
-			$Media=json_decode($row['Media'],true);
-			$Photo=$Media[0]['Thumb'];
-			?> 
-			<div class="col-sm-6 col-md-3 post">
-				<div class="news_img" >
-					<a href="/<?=$Lang?>/gallery_of_works/<?=$row['ID']?>">
-						<img src="/<?=$Photo?>" alt="" class="picture img-responsive">
-					</a>
-				</div>
-				<h4><a href="/<?=$Lang?>/gallery_of_works/<?=$row['ID']?>"><?=LangPart($row['Header'])?></a></h4>
-				<p><?=smallText(LangPart($row['Description']),100)?></p>
-			</div> <!-- end post -->
-		   <? }	?>
-		</div>
-		<div align="right">
-			<a href="/<?=$Lang?>/gallery_of_works" class="btn btn-primary"><?=_Interface('ყველა ნიმუში')?></a>
-		</div>
-	</div>
-</div>
 
 
 
@@ -187,16 +176,27 @@
 			  <section class="regular slider">
 				 <?
 				$i=1;
-				$ptk=mysqli_query($baza,'select * from Partners order by Pos');
-				while($row=mysqli_fetch_array($ptk,1)){
-					$Name=json_decode($row['Name'],true);
-					$Name=$Name[$LangChar];
-					$Url=$row['Url'];
-				  ?> 
-				 <div class="h200" title="<?=$Name?>"><a href="<?=$Url?>" target="_blank"><img src="/<?=$row['Logo']?>" alt="<?=addslashes($Name)?>"></a></div>
-				  <?
-				$i++;
-				}?>
+				$ptk = mysqli_query($baza, 'select * from Partners order by Pos');
+while ($row = mysqli_fetch_array($ptk, 1)) {
+    $NameRaw = $row['Name'];
+    $NameArray = json_decode($NameRaw, true);
+
+    if (!is_array($NameArray) || !isset($NameArray[$LangChar])) {
+        error_log("Invalid Name JSON or missing language key at Partner ID: " . $row['ID']);
+        $Name = 'Unnamed Partner';
+    } else {
+        $Name = $NameArray[$LangChar];
+    }
+
+    $Url = $row['Url'];
+    ?>
+    <div class="h200" title="<?= htmlspecialchars($Name) ?>">
+        <a href="<?= htmlspecialchars($Url) ?>" target="_blank">
+            <img src="/<?= htmlspecialchars($row['Logo']) ?>" alt="<?= htmlspecialchars($Name) ?>">
+        </a>
+    </div>
+    <?
+}?>
 			  </section>
 		</div>
 	
