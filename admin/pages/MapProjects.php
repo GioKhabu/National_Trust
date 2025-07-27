@@ -32,21 +32,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
     } else {
         if (!empty($_POST['edit_id'])) {
             $edit_id = intval($_POST['edit_id']);
-          $stmt = mysqli_prepare($baza, "UPDATE places SET region=?, municipality=?, project_name=?, category=?, award=?, year=?, link=?, x=?, y=?, author=? WHERE id=?");
-mysqli_stmt_bind_param($stmt, "sssssisddsi", $region, $municipality, $project_name, $category, $award, $year, $link, $x, $y, $author, $edit_id);
-$success = mysqli_stmt_execute($stmt);
-
-$message = $success ? 'Project updated successfully.' : 'Failed to update project.';
-
+            $stmt = mysqli_prepare($baza, "UPDATE places SET region=?, municipality=?, project_name=?, category=?, award=?, year=?, link=?, x=?, y=?, author=? WHERE id=?");
+            mysqli_stmt_bind_param($stmt, "sssssisddsi", $region, $municipality, $project_name, $category, $award, $year, $link, $x, $y, $author, $edit_id);
+            $success = mysqli_stmt_execute($stmt);
+            $message = $success ? 'Project updated successfully.' : 'Failed to update project.';
         } else {
-           $stmt = mysqli_prepare($baza, "INSERT INTO places (region, municipality, project_name, category, award, year, link, x, y, author) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-mysqli_stmt_bind_param($stmt, "sssssisdds", $region, $municipality, $project_name, $category, $award, $year, $link, $x, $y, $author);
-
+            $stmt = mysqli_prepare($baza, "INSERT INTO places (region, municipality, project_name, category, award, year, link, x, y, author) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "sssssisdds", $region, $municipality, $project_name, $category, $award, $year, $link, $x, $y, $author);
             $success = mysqli_stmt_execute($stmt);
             $message = $success ? 'Project added successfully.' : 'Failed to add project.';
         }
+
+        if ($success) {
+            // Redirect to avoid duplicate POST on refresh
+            header("Location: ?Action=MapProjects");
+            exit;
+        }
     }
 }
+
 
 // Load record for editing if needed
 $edit = null;
@@ -75,15 +79,7 @@ if ($result) {
     <title>Map Projects</title>
 
 
-    <style>
-        .message { padding: 10px; margin: 10px 0; border-radius: 5px; }
-        .success { background-color: #d4edda; color: #155724; }
-        .error { background-color: #f8d7da; color: #721c24; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
-        th { background: #eee; }
-        button { cursor: pointer; }
-    </style>
+    <link rel="stylesheet" href="/admin/pages/MapProjects.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
@@ -105,6 +101,11 @@ if ($result) {
             setTimeout(() => document.querySelector('.message').remove(), 4000);
         </script>
     <?php endif; ?>
+    <div class="manage-lookups">
+
+<button type="button" onclick="openCategoryModal()">Manage Categories</button>
+<button type="button" onclick="openAwardModal()">Manage Awards</button>
+    </div>
 
     <form id="projectForm" method="post" action="">
     <div class="form-group">
@@ -134,14 +135,32 @@ if ($result) {
     </div>
 
     <div class="form-group">
-        <label for="category">Category</label>
-        <input type="text" name="category" id="category" value="<?= htmlspecialchars($edit['category'] ?? '') ?>" required />
-    </div>
-
+    <label for="category">Category</label>
+    <select name="category" id="category" required>
+        <option value="">-- Select Category --</option>
+        <?php
+        $categories = mysqli_query($baza, "SELECT * FROM category ORDER BY Name ASC");
+        while ($cat = mysqli_fetch_assoc($categories)) {
+            $selected = ($edit['category'] ?? '') == $cat['Name'] ? 'selected' : '';
+            echo "<option value=\"" . htmlspecialchars($cat['Name']) . "\" $selected>" . htmlspecialchars($cat['Name']) . "</option>";
+        }
+        ?>
+    </select>
+</div>
     <div class="form-group">
-        <label for="award">Award</label>
-        <input type="text" name="award" id="award" value="<?= htmlspecialchars($edit['award'] ?? '') ?>" />
-    </div>
+    <label for="award">Award</label>
+    <select name="award" id="award" required>
+        <option value="">-- Select Award --</option>
+        <?php
+        $awards = mysqli_query($baza, "SELECT * FROM award ORDER BY Name ASC");
+        while ($cat = mysqli_fetch_assoc($awards)) {
+            $selected = ($edit['award'] ?? '') == $cat['Name'] ? 'selected' : '';
+            echo "<option value=\"" . htmlspecialchars($cat['Name']) . "\" $selected>" . htmlspecialchars($cat['Name']) . "</option>";
+        }
+        ?>
+    </select>
+</div>
+
 
     <div class="form-group">
     <label for="author">Author</label>
@@ -166,8 +185,19 @@ if ($result) {
 
     <div class="form-group">
     <label for="year">Year</label>
-    <input type="number" name="year" id="year" value="<?= htmlspecialchars($edit['year'] ?? '') ?>" required />
-    </div>
+    <select name="year" id="year" required>
+        <option value="">-- Select Year --</option>
+        <?php
+        $yearsResult = mysqli_query($baza, "SELECT Name FROM award_years ORDER BY Name ASC");
+        while ($yearRow = mysqli_fetch_assoc($yearsResult)) {
+            $yearVal = $yearRow['Name'];
+            $selected = ($edit['year'] ?? '') == $yearVal ? 'selected' : '';
+            echo "<option value=\"" . htmlspecialchars($yearVal) . "\" $selected>" . htmlspecialchars($yearVal) . "</option>";
+        }
+        ?>
+    </select>
+</div>
+
 
     <?php if (isset($edit['id'])): ?>
         <input type="hidden" name="edit_id" value="<?= $edit['id'] ?>">
@@ -207,7 +237,28 @@ if ($result) {
         <?php endforeach; ?>
         </tbody>
     </table>
+<div id="categoryModal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:#fff; padding:20px; border:1px solid #ccc; z-index:9999;">
+    <h3>Manage Categories</h3>
+    <div id="categoryList"></div>
 
+    <h4>Add New Category</h4>
+    <input type="text" id="newCategoryName" placeholder="New category name">
+    <button onclick="addCategory()">Add</button>
+
+    <br><br>
+    <button onclick="closeCategoryModal()">Close</button>
+</div>
+<div id="awardModal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:#fff; padding:20px; border:1px solid #ccc; z-index:9999;">
+    <h3>Manage Awards</h3>
+    <div id="awardList"></div>
+
+    <h4>Add New Award</h4>
+    <input type="text" id="newAwardName" placeholder="New award name">
+    <button onclick="addAward()">Add</button>
+
+    <br><br>
+    <button onclick="closeAwardModal()">Close</button>
+</div>
 <script>
 $(document).ready(function() {
     $('.deleteBtn').on('click', function() {
@@ -261,190 +312,154 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+function openCategoryModal() {
+    document.getElementById('categoryModal').style.display = 'block';
+    fetchCategories();
+}
 
+function closeCategoryModal() {
+    document.getElementById('categoryModal').style.display = 'none';
+}
 
+function fetchCategories() {
+    fetch('/admin/ajax/categories.php?action=list')
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('categoryList').innerHTML = data;
+        });
+}
+
+function addCategory() {
+    const name = document.getElementById('newCategoryName').value.trim();
+    if (name === '') return;
+
+    fetch('/admin/ajax/categories.php?action=add', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'name=' + encodeURIComponent(name)
+    }).then(() => {
+        document.getElementById('newCategoryName').value = '';
+        fetchCategories();
+        refreshCategorySelect(); // NEW
+    });
+}
+function refreshCategorySelect() {
+    fetch('/admin/ajax/categories.php?action=list')
+        .then(res => res.text())
+        .then(data => {
+            // Parse names from the modal output
+            const container = document.createElement('div');
+            container.innerHTML = data;
+            const options = Array.from(container.querySelectorAll('div'))
+                .map(div => div.textContent.split('Edit')[0].trim());
+
+            const select = document.getElementById('category');
+            select.innerHTML = '<option value="">-- Select Category --</option>';
+            options.forEach(name => {
+                const opt = document.createElement('option');
+                opt.value = name;
+                opt.textContent = name;
+                select.appendChild(opt);
+            });
+        });
+}
+
+function updateCategory(id) {
+    const name = prompt("Edit category name:");
+    if (!name) return;
+
+    fetch('/admin/ajax/categories.php?action=edit', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'id=' + id + '&name=' + encodeURIComponent(name)
+    }).then(fetchCategories);
+}
+
+function deleteCategory(id) {
+    if (!confirm("Delete this category?")) return;
+
+    fetch('/admin/ajax/categories.php?action=delete', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'id=' + id
+    }).then(fetchCategories);
+}
+</script>
+<script>
+function openAwardModal() {
+    document.getElementById('awardModal').style.display = 'block';
+    fetchAwards();
+}
+
+function closeAwardModal() {
+    document.getElementById('awardModal').style.display = 'none';
+}
+
+function fetchAwards() {
+    fetch('/admin/ajax/awards.php?action=list')
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('awardList').innerHTML = data;
+        });
+}
+
+function addAward() {
+    const name = document.getElementById('newAwardName').value.trim();
+    if (name === '') return;
+
+    fetch('/admin/ajax/awards.php?action=add', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'name=' + encodeURIComponent(name)
+    }).then(() => {
+        document.getElementById('newAwardName').value = '';
+        fetchAwards();
+        refreshAwardSelect(); // Refresh dropdown if needed
+    });
+}
+
+function refreshAwardSelect() {
+    fetch('/admin/ajax/awards.php?action=list')
+        .then(res => res.text())
+        .then(data => {
+            const container = document.createElement('div');
+            container.innerHTML = data;
+            const options = Array.from(container.querySelectorAll('div'))
+                .map(div => div.textContent.split('Edit')[0].trim());
+
+            const select = document.getElementById('award');
+            select.innerHTML = '<option value="">-- Select Award --</option>';
+            options.forEach(name => {
+                const opt = document.createElement('option');
+                opt.value = name;
+                opt.textContent = name;
+                select.appendChild(opt);
+            });
+        });
+}
+
+function updateAward(id) {
+    const name = prompt("Edit award name:");
+    if (!name) return;
+
+    fetch('/admin/ajax/awards.php?action=edit', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'id=' + id + '&name=' + encodeURIComponent(name)
+    }).then(fetchAwards);
+}
+
+function deleteAward(id) {
+    if (!confirm("Delete this award?")) return;
+
+    fetch('/admin/ajax/awards.php?action=delete', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'id=' + id
+    }).then(fetchAwards);
+}
+</script>
 </body>
 </html>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        padding: 0;
-    }
-h1 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-h1 a {
-    font-size: 14px;
-    padding: 6px 12px;
-    background: #28a745;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.3s;
-}
-
-h1 a:hover {
-    background: #218838;
-}
-    form#projectForm {
-        width: 90%;
-        height: auto;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 15px;
-        padding: 20px;
-        margin-bottom: 30px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        background: #f9f9f9;
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 15px;
-    }
-
-    .form-group label {
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-
-    .form-group input {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 14px;
-    }
-
-    button[type="submit"] {
-        padding: 10px 10px;
-        background-color: #007bff;
-        height: 40px;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    button[type="submit"]:hover {
-        background-color: #0056b3;
-    }
-.editBtn {
-    background: #28a745;   /* Bootstrap green */
-    color: white;
-    padding: 6px 10px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-block;
-    transition: background-color 0.3s;
-}
-
-.editBtn:hover {
-    background: #218838;  /* Darker green on hover */
-}
-    .message {
-        padding: 10px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-    }
-
-    .success {
-        background-color: #d4edda;
-        color: #155724;
-    }
-
-    .error {
-        background-color: #f8d7da;
-        color: #721c24;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        overflow-x: auto;
-    }
-
-    th, td {
-        padding: 10px;
-        border: 1px solid #ccc;
-        text-align: left;
-        font-size: 14px;
-    }
-
-    th {
-        background-color: #f0f0f0;
-    }
-
-    .deleteBtn {
-        background: #dc3545;
-        color: white;
-        border: none;
-        padding: 6px 10px;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    .deleteBtn:hover {
-        background: #c82333;
-    }
-
-    @media (max-width: 600px) {
-        form#projectForm {
-            padding: 15px;
-        }
-
-        .form-group {
-            flex-direction: column;
-        }
-
-        table, thead, tbody, th, td, tr {
-            display: block;
-        }
-
-        thead {
-            display: none;
-        }
-
-        tr {
-            margin-bottom: 15px;
-        }
-
-        td {
-            position: relative;
-            padding-left: 50%;
-        }
-
-        td::before {
-            position: absolute;
-            left: 10px;
-            top: 10px;
-            white-space: nowrap;
-            font-weight: bold;
-        }
-
-        td:nth-of-type(1)::before { content: "ID"; }
-        td:nth-of-type(2)::before { content: "Region"; }
-        td:nth-of-type(3)::before { content: "Municipality"; }
-        td:nth-of-type(4)::before { content: "Project"; }
-        td:nth-of-type(5)::before { content: "Category"; }
-        td:nth-of-type(6)::before { content: "Award"; }
-        td:nth-of-type(7)::before { content: "Year"; }
-        td:nth-of-type(8)::before { content: "Link"; }
-        td:nth-of-type(9)::before { content: "X"; }
-        td:nth-of-type(10)::before { content: "Y"; }
-        td:nth-of-type(11)::before { content: "Actions"; }
-    }
-</style>
