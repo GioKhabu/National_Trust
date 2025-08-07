@@ -91,6 +91,7 @@ if ($LangID === false) {
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="/css/font-awesome.css"> 
 	<link rel="stylesheet" type="text/css" href="/css/styles_main.css?v<?=$v?>" />
+	<link rel="stylesheet" href="/pages/shared/map.css">
 	
 	<link rel="icon" href="/img/save-logo-32.png" sizes="32x32" />
 	<link rel="icon" href="/img/save-logo-192.png" sizes="192x192" />

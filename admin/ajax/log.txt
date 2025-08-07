@@ -1,0 +1,50 @@
+Received region: {\"G\":\"იმერეთი\",\"E\":\"Imereti\"}
+Parsed region: {\\\"G\\\":\\\"იმერეთი\\\",\\\"E\\\":\\\"Imereti\\\"}
+SQL: SELECT m.name_ge, m.name_en 
+              FROM municipalities m 
+              JOIN regions r ON m.region_id = r.id 
+              WHERE TRIM(r.name_ge) = '{\\\"G\\\":\\\"იმერეთი\\\",\\\"E\\\":\\\"Imereti\\\"}' 
+              ORDER BY m.name_ge ASC
+No municipalities found
+Received region: {\"G\":\"კახეთი\",\"E\":\"Kakheti\"}
+Parsed region: {\\\"G\\\":\\\"კახეთი\\\",\\\"E\\\":\\\"Kakheti\\\"}
+SQL: SELECT m.name_ge, m.name_en 
+              FROM municipalities m 
+              JOIN regions r ON m.region_id = r.id 
+              WHERE TRIM(r.name_ge) = '{\\\"G\\\":\\\"კახეთი\\\",\\\"E\\\":\\\"Kakheti\\\"}' 
+              ORDER BY m.name_ge ASC
+No municipalities found
+Received region: {\"G\":\"სამცხე-ჯავახეთი\",\"E\":\"Samtskhe-Javakheti\"}
+Parsed region: {\\\"G\\\":\\\"სამცხე-ჯავახეთი\\\",\\\"E\\\":\\\"Samtskhe-Javakheti\\\"}
+SQL: SELECT m.name_ge, m.name_en 
+              FROM municipalities m 
+              JOIN regions r ON m.region_id = r.id 
+              WHERE TRIM(r.name_ge) = '{\\\"G\\\":\\\"სამცხე-ჯავახეთი\\\",\\\"E\\\":\\\"Samtskhe-Javakheti\\\"}' 
+              ORDER BY m.name_ge ASC
+No municipalities found
+Received region: {\"G\":\"იმერეთი\",\"E\":\"Imereti\"}
+Parsed region: {\\\"G\\\":\\\"იმერეთი\\\",\\\"E\\\":\\\"Imereti\\\"}
+SQL: SELECT m.name_ge, m.name_en 
+              FROM municipalities m 
+              JOIN regions r ON m.region_id = r.id 
+              WHERE TRIM(r.name_ge) = '{\\\"G\\\":\\\"იმერეთი\\\",\\\"E\\\":\\\"Imereti\\\"}' 
+              ORDER BY m.name_ge ASC
+No municipalities found
+Array
+(
+    [region] => 4
+    [selected] => 15
+    [row_ids] => Array
+        (
+        )
+
+)
+Array
+(
+    [region] => 4
+    [selected] => 15
+    [row_ids] => Array
+        (
+        )
+
+)

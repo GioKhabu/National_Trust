@@ -2,31 +2,30 @@
 require_once('../../conf.php');
 header('Content-Type: text/html; charset=utf-8');
 
+$lang = $_POST['lang'] ?? 'ge'; // fallback to 'ge' if not set
+$selected_id = isset($_POST['selected']) ? (int)$_POST['selected'] : 0;
+
 if (isset($_POST['region'])) {
-    $region = mysqli_real_escape_string($baza, $_POST['region']);
+    $region_id = intval($_POST['region']);
 
-    // Log region to check encoding
-    error_log("Region received: " . $region);
-
-    $query = "SELECT m.name_ge FROM municipalities m 
-              JOIN regions r ON m.region_id = r.id 
-              WHERE r.name_ge = '$region' 
-              ORDER BY m.name_ge ASC";
-
-    // Log the query for debugging
-    error_log("Query: " . $query);
+    $query = "SELECT id, name_ge, name_en FROM municipalities 
+              WHERE region_id = $region_id 
+              ORDER BY name_ge ASC";
 
     $result = mysqli_query($baza, $query);
 
     if (!$result) {
-        error_log("Query error: " . mysqli_error($baza));
         echo "<option value=''>Query error</option>";
         exit;
     }
 
+    echo '<option value="">-- Select Municipality --</option>';
+
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            echo '<option value="' . htmlspecialchars($row['name_ge']) . '">' . htmlspecialchars($row['name_ge']) . '</option>';
+            $display = ($lang === 'en') ? $row['name_en'] : $row['name_ge'];
+            $selected = ((int)$row['id'] === $selected_id) ? ' selected' : '';
+            echo '<option value="' . (int)$row['id'] . '"' . $selected . '>' . htmlspecialchars($display) . '</option>';
         }
     } else {
         echo '<option value="">No municipalities found</option>';

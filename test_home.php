@@ -38,9 +38,12 @@ while ($row = mysqli_fetch_array($ptk, 1)) {
         <?php
 }
 ?>
+
+
     </ul>
 </div>
 <link rel="stylesheet" type="text/css" href="/bxslider4/dist/jquery.bxslider.min.css?v<?=$v?>" />
+<script src="/bxslider4/dist/jquery.bxslider.min.js?v<?=$v?>"></script>
 <script src="/bxslider4/dist/jquery.bxslider.min.js?v=<?=$v?>"></script>
 <script>
 $(document).ready(function() {
@@ -54,7 +57,6 @@ $(document).ready(function() {
     }
 });
 </script>
-
 
 
 
@@ -73,15 +75,9 @@ $(document).ready(function() {
 </div>
 
 
-<div class="home-heading-container">
-    <h2 class="home-heading map-title">
-        <?= ($Lang === 'en') ? 'Contest “My Heritage”' : 'კონკურსი „ჩემი მემკვიდრეობა“' ?>
-    </h2>
-    <div class='map-text'><?= ($Lang === 'en') ? 'The aim of the project is to promote and bring public attention to individuals who share a love for heritage and recognize the importance of preserving and promoting it as a tangible expression of national identity and creativity.
-Information about the winning projects can be found on the map or explored in detail through their descriptions. ' : 'პროექტის მიზანია, ხელი შეუწყოს და ფართო საზოგადოებისთვის ცნობილი გახადოს ადამიანები, რომლებიც იზიარებენ მემკვიდრეობის მიმართ სიყვარულს, გრძნობენ მათი შენარჩუნება-გავრცელების საჭიროებას, როგორც ერის იდენტობისა და შემოქმედებითობის თვალსაჩინო, ხელშესახებ დადასტურებას. 
-გამარჯვებული პროექტების შესახებ ინფორმაცია შეგიძლიათ მოიძიოთ რუკაზე ან გაეცნოთ დეტალურ აღწერას' ?></div>
-    <?php include(__DIR__ . '/shared/map.php'); ?>
-</div>
+
+
+
 
 
 <div class="home-heading-container">
@@ -113,6 +109,9 @@ Information about the winning projects can be found on the map or explored in de
         </div>
     </div>
 </div>
+
+
+
 
 <div class="home-heading-container">
     <div class="row">
@@ -164,6 +163,12 @@ Information about the winning projects can be found on the map or explored in de
 </div>
 
 
+
+
+
+
+
+
 <div class="home-heading-container">
     <div>
         <h2 class="home-heading">
@@ -199,6 +204,8 @@ while ($row = mysqli_fetch_array($ptk, 1)) {
 
     </div>
 </div>
+
+
 
 
 
@@ -260,14 +267,6 @@ h2.home-heading {
 
 .homeBlock h2.home-heading {
     color: #fff;
-}
-
-.map-title {
-    padding: 0 20px;
-}
-
-.map-text {
-    padding: 0 20px;
 }
 
 .HBText {
