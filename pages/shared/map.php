@@ -225,6 +225,8 @@ function createRedCircle() {
     return div;
 }
 
+let activeInfoWindow = null;
+
 function showMarkers(data) {
     clearMarkers();
 
@@ -244,23 +246,31 @@ function showMarkers(data) {
         });
 
         const content = `
-  <div class="custom-infowindow">
-    <h3>${safeTranslate(place.project_name)}</h3> <!-- if project_name is JSON string -->
-    <p><strong>${lang === 'E' ? 'Region' : 'რეგიონი'}:</strong> ${place.region}</p>
-    <p><strong>${lang === 'E' ? 'Municipality' : 'მუნიციპალიტეტი'}:</strong> ${place.municipality}</p>
-    <p><strong>${lang === 'E' ? 'Category' : 'კატეგორია'}:</strong> ${place.category}</p>
-    <p><strong>${lang === 'E' ? 'Award' : 'ჯილდო'}:</strong> ${place.award}</p>
-    <p><strong>${lang === 'E' ? 'Year' : 'წელი'}:</strong> ${place.year}</p>
-    <p><strong>${lang === 'E' ? 'Author' : 'ავტორი'}:</strong> ${safeTranslate(place.author)}</p> <!-- if author is JSON string -->
-    <p><a href="${place.link}" target="_blank" rel="noopener" class="infowindow-btn">${lang === 'E' ? 'Link' : 'ბმული'}</a></p>
-  </div>
-`;
+          <div class="custom-infowindow">
+            <h3>${safeTranslate(place.project_name)}</h3>
+            <p><strong>${lang === 'E' ? 'Region' : 'რეგიონი'}:</strong> ${place.region}</p>
+            <p><strong>${lang === 'E' ? 'Municipality' : 'მუნიციპალიტეტი'}:</strong> ${place.municipality}</p>
+            <p><strong>${lang === 'E' ? 'Category' : 'კატეგორია'}:</strong> ${place.category}</p>
+            <p><strong>${lang === 'E' ? 'Award' : 'ჯილდო'}:</strong> ${place.award}</p>
+            <p><strong>${lang === 'E' ? 'Year' : 'წელი'}:</strong> ${place.year}</p>
+            <p><strong>${lang === 'E' ? 'Author' : 'ავტორი'}:</strong> ${safeTranslate(place.author)}</p>
+            <p><a href="${place.link}" target="_blank" rel="noopener" class="infowindow-btn">
+              ${lang === 'E' ? 'Link' : 'ბმული'}
+            </a></p>
+          </div>
+        `;
+
         const infowindow = new google.maps.InfoWindow({
             content
         });
 
         marker.addListener('click', () => {
+            // Close previous infoWindow if still open
+            if (activeInfoWindow) {
+                activeInfoWindow.close();
+            }
             infowindow.open(map, marker);
+            activeInfoWindow = infowindow;
         });
 
         markers.push(marker);

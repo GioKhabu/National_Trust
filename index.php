@@ -47,15 +47,17 @@ if ($LangID === false) {
 }
 ?>
 
-<!doctype html> 
+<!doctype html>
 <html lang="en" class="no-js">
-<head>
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
-	<meta charset="utf-8" />
-	<title><?=_Interface('Home Page')?> | <?=_Interface('საქართველოს ეროვნული ფონდი')?></title>
-	<meta name="description" content="" />
 
-	<?
+<head>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+    <meta charset="utf-8" />
+    <title><?=_Interface('Home Page')?> | <?=_Interface('საქართველოს ეროვნული ფონდი')?></title>
+    <meta name="description" content="" />
+
+    <?
     $title=_Interface('საქართველოს ეროვნული ფონდი');
     $description= _Interface('საქართველოს ეროვნული ფონდის ოფიციალური ვებგვერდი');
     $image="img/save-logo-192.png";
@@ -72,39 +74,47 @@ if ($LangID === false) {
             }
         }
     ?>
-	<meta property="og:title" content="<?=$title?>"/>
-    <meta property="og:description" content="<?=$description?>"/>
+    <meta property="og:title" content="<?=$title?>" />
+    <meta property="og:description" content="<?=$description?>" />
     <meta property="og:site_name" content="<?=_Interface('საქართველოს ეროვნული ფონდი')?>" />
-    <meta property="og:image"  itemprop="image primaryImageOfPage" content="/<?=$image?>" />
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="/<?=$image?>" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://<?=$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']?>"/>
+    <meta property="og:url" content="https://<?=$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']?>" />
 
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-	
-	<link rel="stylesheet" href="/css/bootstrap.min.css?v<?=$v?>" />
-	<link rel="stylesheet" href="/css/style.css?v<?=$v?>" />
-	<link rel="stylesheet" type="text/css" href="/css/megamenu.css?v<?=$v?>" /> 
-	<link rel="stylesheet" type="text/css" href="/css/bpgmc.css?v<?=$v?>" /> 
-	<link rel="stylesheet" type="text/css" href="/css/bpg_ing_arial.css?v<?=$v?>" /> 
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="/css/font-awesome.css"> 
-	<link rel="stylesheet" type="text/css" href="/css/styles_main.css?v<?=$v?>" />
-	<link rel="stylesheet" href="/pages/shared/map.css">
-	
-	<link rel="icon" href="/img/save-logo-32.png" sizes="32x32" />
-	<link rel="icon" href="/img/save-logo-192.png" sizes="192x192" />
-	<link rel="apple-touch-icon" href="/img/save-logo-180.png" /> 
-	<meta name="msapplication-TileImage" content="/img/save-logo-270.png" />
 
-	<style>
-		body {font-family: 'arial'}
-		body.ge {font-family: 'BPGIngiriArial'}
-		.body_content{min-height: 300px; margin-bottom: 30px;}
-		
-	</style>
-	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css?v<?=$v?>" />
+    <link rel="stylesheet" href="/css/style.css?v<?=$v?>" />
+    <link rel="stylesheet" type="text/css" href="/css/megamenu.css?v<?=$v?>" />
+    <link rel="stylesheet" type="text/css" href="/css/bpgmc.css?v<?=$v?>" />
+    <link rel="stylesheet" type="text/css" href="/css/bpg_ing_arial.css?v<?=$v?>" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles_main.css?v<?=$v?>" />
+    <link rel="stylesheet" href="/pages/shared/map.css">
+
+    <link rel="icon" href="/img/save-logo-32.png" sizes="32x32" />
+    <link rel="icon" href="/img/save-logo-192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/img/save-logo-180.png" />
+    <meta name="msapplication-TileImage" content="/img/save-logo-270.png" />
+
+    <style>
+    body {
+        font-family: 'arial'
+    }
+
+    body.ge {
+        font-family: 'BPGIngiriArial'
+    }
+
+    .body_content {
+        min-height: 300px;
+        margin-bottom: 30px;
+    }
+    </style>
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js" crossorigin="anonymous"></script>
 
@@ -113,64 +123,72 @@ if ($LangID === false) {
     <link href="/fancybox357/dist/jquery.fancybox.min.css" rel="stylesheet" />
     <script src="/fancybox357/dist/jquery.fancybox.min.js"></script>
 
-    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=67dc145d59793500196aaf4d&product=inline-share-buttons&source=platform" async="async"></script>
-	
+    <script type="text/javascript"
+        src="https://platform-api.sharethis.com/js/sharethis.js#property=67dc145d59793500196aaf4d&product=inline-share-buttons&source=platform"
+        async="async"></script>
+
 </head>
+
 <body class="<?=$Lang?>">
 
 
-<div id="search-container">
-    <div id="search-content">
-        <div id="logo-link">
-            <a href="/<?=$Lang?>"><img src="/img/save-logo-white.png" class="logo-img" /></a>
-        </div>
-        <a href="/<?=$Lang?>/donation/" class="donate-button"><?=_Interface('შემოწირულობა')?></a>
-        <div class="header-buttons">
-            <a href="#" class="butt lang" id="search-trigger"><i class="fa fa-search"></i></a>
-            <a href="/<?=$Lang2?><?=$menu!=''?'/'.$menu:''?><?=$page!=''?'/'.$page:''?>" id="lang" class="butt lang"><?=$Lang2?></a>
+    <div id="search-container">
+        <div id="search-content">
+            <div id="logo-link">
+                <a href="/<?=$Lang?>"><img src="/img/save-logo-white.png" class="logo-img" /></a>
+            </div>
+            <a href="/<?=$Lang?>/donation/" class="donate-button"><?=_Interface('შემოწირულობა')?></a>
+            <div class="header-buttons">
+                <a href="#" class="butt lang" id="search-trigger"><i class="fa fa-search"></i></a>
+                <a href="/<?=$Lang2?><?=$menu!=''?'/'.$menu:''?><?=$page!=''?'/'.$page:''?>" id="lang"
+                    class="butt lang"><?=$Lang2?></a>
+            </div>
         </div>
     </div>
-</div>
 
-<div id="header-container">
-    <div id="header-content"></div>
-</div>
+    <div id="header-container">
+        <div id="header-content"></div>
+    </div>
 
-	
-<div id="search-form-wrapper">
-	<div id="search-form-content">
-		<div action="/<?=$Lang2?>/search" class="search-form" method="get" accept-charset="utf-8" enctype="multipart/form-data">
-		<input type="text" id="src" name="src" placeholder="<?=_Interface('ჩაწერეთ საძებნი ტექსტი')?>" />&nbsp;&nbsp;
-		<button type="submit" class="butt" onClick="srcText()"><i class="fa fa-search"></i> <?=_Interface('ძებნა')?></button>
-		</div>
-	</div>
-</div>
-<!--// Navbar Ends--> 
-<script>
-	$('#src').on('keypress',function(e){
-		if(e.keyCode==13) srcText();
-		});
 
-	function srcText(){
-		var q=$('#src').val();
-		q=q.trim();
-		if(q!='') window.location='/<?=$Lang?>/search//'+q;
-	}
-</script>	
-<div id="menu-wrapper" >
-	<div class="megamenu_container"><!-- Full width wrapper --> 
-<?
+    <div id="search-form-wrapper">
+        <div id="search-form-content">
+            <div action="/<?=$Lang2?>/search" class="search-form" method="get" accept-charset="utf-8"
+                enctype="multipart/form-data">
+                <input type="text" id="src" name="src"
+                    placeholder="<?=_Interface('ჩაწერეთ საძებნი ტექსტი')?>" />&nbsp;&nbsp;
+                <button type="submit" class="butt" onClick="srcText()"><i class="fa fa-search"></i>
+                    <?=_Interface('ძებნა')?></button>
+            </div>
+        </div>
+    </div>
+    <!--// Navbar Ends-->
+    <script>
+    $('#src').on('keypress', function(e) {
+        if (e.keyCode == 13) srcText();
+    });
+
+    function srcText() {
+        var q = $('#src').val();
+        q = q.trim();
+        if (q != '') window.location = '/<?=$Lang?>/search//' + q;
+    }
+    </script>
+    <div id="menu-wrapper">
+        <div class="megamenu_container">
+            <!-- Full width wrapper -->
+            <?
 if(isset($_SESSION['Menus']))
 	$MENU=$_SESSION['Menus'];
 	else
 	$MENU=$_SESSION['Menus']=getMenuChilds(0);
 	
 ?>
-	
-<a id="megamenu-button-mobile" href="#">&nbsp;</a><!-- <?=_Interface('Menu')?> Menu button responsive-->	
-<!-- Begin Mega Menu Container -->
-	<ul class="megamenu">
-		<?
+
+            <a id="megamenu-button-mobile" href="#">&nbsp;</a><!-- <?=_Interface('Menu')?> Menu button responsive-->
+            <!-- Begin Mega Menu Container -->
+            <ul class="megamenu">
+                <?
 		foreach($MENU as $mEl1)
 			if($mEl1['Active']==1){
 			echo '<li><a href="'.(!isset($mEl1['Childs'])?'/'.$Lang.'/'.$mEl1['ShortUrl']:'javascript:void(0)').'" class="'.(isset($mEl1['Childs'])?'drop-down':'nodrop-down').'">'.$mEl1['Title'.$LangChar].'</a>';
@@ -195,13 +213,13 @@ if(isset($_SESSION['Menus']))
 			echo '</li> ';
 			}
 	 ?>
-	</ul><!-- End Mega Menu -->
+            </ul><!-- End Mega Menu -->
 
-	</div><!-- End menu-container -->
-</div><!-- End menu-wrapper -->
-	
-<div class="body_content">
-<?
+        </div><!-- End menu-container -->
+    </div><!-- End menu-wrapper -->
+
+    <div class="body_content">
+        <?
 function menuRecord($MENU, $menu){
 	foreach($MENU as $Menu){
 		if($Menu['ShortUrl']==$menu){
@@ -256,8 +274,8 @@ $MT=menuType($MENU, $menu);
 $Mr=$Mr0=menuRecord($MENU, $menu);
 /*
 	?>
-	<div class="menuChain"><?=menuChain($Mr)?></div>
-	<?
+        <div class="menuChain"><?=menuChain($Mr)?></div>
+        <?
 	echo $menu;*/
 
 if($MT=='Dynamic'){
@@ -301,32 +319,33 @@ if($MT=='Dynamic'){
 		echo '</div>';
 		echo '</div>';
         ?>
-<script>
-
-    $('.fixText img').each(function(i,e){
-        var photo=$(e).attr('src');
-        var a='<div class="f-carousel__slide" data-thumb-src="'+photo+'" data-thumb-width="108" data-thumb-height="72" data-fancybox="gallery" data-src="'+photo+'"><img src="'+photo+'"></div>';
-        // console.log(a);
-        $(a).insertAfter(e);
-        $(e).remove();
-    })
-    
-    $('.fixewdPage .well a').each(function(i,e){
-        // console.log(i,e);
-        var url=$(e).attr('href').split('/').pop();
-        url=url.split('#')[0];
-        // console.log(url,'<?=urldecode($menu)?>');
-        if(url=='<?=urldecode($menu)?>')
-           $(e).parent().addClass('selected');
+        <script>
+        $('.fixText img').each(function(i, e) {
+            var photo = $(e).attr('src');
+            var a = '<div class="f-carousel__slide" data-thumb-src="' + photo +
+                '" data-thumb-width="108" data-thumb-height="72" data-fancybox="gallery" data-src="' + photo +
+                '"><img src="' + photo + '"></div>';
+            // console.log(a);
+            $(a).insertAfter(e);
+            $(e).remove();
         })
-    
-	$('.fixText a').each(function(i,e){
-        var url=$(e).attr('href').split('://');
-        if(url[0]=='http' || url[0]=='https')
-           $(e).attr('target','_blank');
-    })
-</script>    
-    <?
+
+        $('.fixewdPage .well a').each(function(i, e) {
+            // console.log(i,e);
+            var url = $(e).attr('href').split('/').pop();
+            url = url.split('#')[0];
+            // console.log(url,'<?=urldecode($menu)?>');
+            if (url == '<?=urldecode($menu)?>')
+                $(e).parent().addClass('selected');
+        })
+
+        $('.fixText a').each(function(i, e) {
+            var url = $(e).attr('href').split('://');
+            if (url[0] == 'http' || url[0] == 'https')
+                $(e).attr('target', '_blank');
+        })
+        </script>
+        <?
 		if($menu=='donation')
 			include ('pages/donate.php');
 		if($menu=='become_a_volunteer')
@@ -337,133 +356,151 @@ if($MT=='Dynamic'){
 	?>
 
 
-</div>
+    </div>
 
 
-<div id="footer-container">
-
-	
-	<footer>
-
-		<div class="foot-left">
-
-			<div class="foot-inner-a">
-				<a href="/<?=$Lang?>">
-					<img src="/img/save-logo-white.png" style="width: 90%; ">
-				</a>
-			</div>
-
-			<div class="foot-inner-b">
-				© 2024 <?=_Interface('საქართველოს ეროვნული ფონდი')?><br />
-				<?=_Interface('მეფე სოლომონ ბრძენის ქ.33, 0103 თბილისი, საქართველო')?><br />
-				<?=_Interface('ს.კ.:404522389')?><br />
-				<?=_Interface('ტელ')?>: (+995) 555 490 917 <br />
-				<a href="mailto:office@nationaltrustgeo.org">office@nationaltrustgeo.org</a>
-				<br /><br />	
+    <div id="footer-container">
 
 
-			</div>
+        <footer>
 
-		</div>
+            <div class="foot-left">
 
-		<div class="foot-right">
+                <div class="foot-inner-a">
+                    <a href="/<?=$Lang?>">
+                        <img src="/img/save-logo-white.png" style="width: 90%; ">
+                    </a>
+                </div>
 
-			<div class="foot-inner-a">
-				<?=_Interface('გამოგვყევით')?>:<br />
-				<a href="https://www.instagram.com/nationaltrustge/" target="_blank">Instagram</a><br />
-				<a href="https://www.linkedin.com/company/the-national-trust-of-georgia/?originalSubdomain=ge" target="_blank">Linkedin</a><br />
-				<a href="http://www.facebook.com/thenationaltrustofgeorgia" target="_blank">Facebook</a><br />
-				<br />
-			</div>
-
-			<div class="foot-inner-b">
-				<a href="/<?=$Lang?>/donation/" class="donate-button foot_donate"><?=_Interface('შემოწირულობა')?></a>
-				<br>
-			</div>
-
-		</div>
-
-	</footer>
-
-	<div class="foot-full">
-		
-	</div>
-
-</div>
+                <div class="foot-inner-b">
+                    © 2024 <?=_Interface('საქართველოს ეროვნული ფონდი')?><br />
+                    <?=_Interface('მეფე სოლომონ ბრძენის ქ.33, 0103 თბილისი, საქართველო')?><br />
+                    <?=_Interface('ს.კ.:404522389')?><br />
+                    <?=_Interface('ტელ')?>: (+995) 555 490 917 <br />
+                    <a href="mailto:office@nationaltrustgeo.org">office@nationaltrustgeo.org</a>
+                    <br /><br />
 
 
+                </div>
 
-	<!-- MEGAMENU --> 
-<script src="/js/jquery.easing.js"></script>
-<script src="/js/megamenu.js"></script>
-	
-	<!-- OTHER JS -->    
-<script src="/js/bootstrap.js"></script>
-<script src="/js/functions.js"></script>
-	
-<button onclick="topFunction()" id="myBtn" title="Go to top"><?=_Interface('ზევით')?></button>
-	
-<script>
-	$('#search-trigger').on('click',function(e){
-		$('#search-form-wrapper').slideToggle();
+            </div>
+
+            <div class="foot-right">
+
+                <div class="foot-inner-a">
+                    <?=_Interface('გამოგვყევით')?>:<br />
+                    <a href="https://www.instagram.com/nationaltrustge/" target="_blank">Instagram</a><br />
+                    <a href="https://www.linkedin.com/company/the-national-trust-of-georgia/?originalSubdomain=ge"
+                        target="_blank">Linkedin</a><br />
+                    <a href="http://www.facebook.com/thenationaltrustofgeorgia" target="_blank">Facebook</a><br />
+                    <br />
+                </div>
+
+                <div class="foot-inner-b">
+                    <a href="/<?=$Lang?>/donation/" class="donate-button foot_donate"><?=_Interface('შემოწირულობა')?>
+                    </a>
+                    <br>
+                    <a href="/<?=$Lang?>/terms/" class="footer-link">
+                        <?= ($Lang == 'ge') ? 'წესები და პირობები' : 'Terms & Conditions' ?>
+                    </a><br>
+                    <a href="/<?=$Lang?>/privacy/" class="footer-link">
+                        <?= ($Lang == 'ge') ? 'კონფიდენციალურობის პოლიტიკა' : 'Privacy Policy' ?>
+                    </a>
+                </div>
+
+            </div>
+
+        </footer>
+
+        <div class="foot-full">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MEGAMENU -->
+    <script src="/js/jquery.easing.js"></script>
+    <script src="/js/megamenu.js"></script>
+
+    <!-- OTHER JS -->
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/functions.js"></script>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><?=_Interface('ზევით')?></button>
+
+    <script>
+    $('#search-trigger').on('click', function(e) {
+        $('#search-form-wrapper').slideToggle();
         $('#search-form-wrapper input').focus();
-	})
-	
-// Get the button:
-let mybutton = document.getElementById("myBtn");
+    })
 
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+    // Get the button:
+    let mybutton = document.getElementById("myBtn");
 
-function scrollFunction() {
-  if (document.body.scrollTop > 280 || document.documentElement.scrollTop > 280) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
 
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-	window.scrollTo({top: 0, behavior: 'smooth'});
-/*
-var timerHandle = setInterval(function() {
-  if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0)
-  window.scrollBy(0,-50); else clearInterval(timerHandle); },10);
-*/
-	return false;
-}
-
-
-</script>
-
-
-
-<script>
-  $(window).scroll(function () {
-    if ($(window).width() >= 992) {
-      var $row = $('.pageContainer > .row');
-      var $col = $('.pageContainer > .row > .col-md-3');
-
-      // Make sure both elements exist before continuing
-      if ($row.length && $col.length && $row.offset()) {
-        var h0 = $col.height();
-        var s = $(window).scrollTop();
-        var h = $row.height();
-        var t = $row.offset().top;
-
-        s = s - t;
-        if (s < 0) s = 0;
-        var ss = (h0 + s < h) ? s : (h - h0);
-        $col.css({ top: ss });
-      } else {
-        $col.css({ top: 0 });
-      }
-    } else {
-      $('.pageContainer > .row > .col-md-3').css({ top: 0 });
+    function scrollFunction() {
+        if (document.body.scrollTop > 280 || document.documentElement.scrollTop > 280) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
     }
-  });
-</script>
-    
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        /*
+        var timerHandle = setInterval(function() {
+          if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0)
+          window.scrollBy(0,-50); else clearInterval(timerHandle); },10);
+        */
+        return false;
+    }
+    </script>
+
+
+
+    <script>
+    $(window).scroll(function() {
+        if ($(window).width() >= 992) {
+            var $row = $('.pageContainer > .row');
+            var $col = $('.pageContainer > .row > .col-md-3');
+
+            // Make sure both elements exist before continuing
+            if ($row.length && $col.length && $row.offset()) {
+                var h0 = $col.height();
+                var s = $(window).scrollTop();
+                var h = $row.height();
+                var t = $row.offset().top;
+
+                s = s - t;
+                if (s < 0) s = 0;
+                var ss = (h0 + s < h) ? s : (h - h0);
+                $col.css({
+                    top: ss
+                });
+            } else {
+                $col.css({
+                    top: 0
+                });
+            }
+        } else {
+            $('.pageContainer > .row > .col-md-3').css({
+                top: 0
+            });
+        }
+    });
+    </script>
+
 </body>
+
 </html>
